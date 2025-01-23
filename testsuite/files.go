@@ -306,7 +306,7 @@ func getProtoDesc(filename string) (pkgName, msgName string, desc *descriptor.Fi
 }
 
 func newProtoParser(pkgName, msgName string, desc *descriptor.FileDescriptorSet, filename string) (ResetParser, error) {
-	pp, err := protoparser.NewProtoParser(pkgName, msgName, desc)
+	pp, err := protoparser.NewParserWithDesc(pkgName, msgName, desc)
 	if err != nil {
 		return nil, fmt.Errorf("err <%v> createing proto parser", err)
 	}
