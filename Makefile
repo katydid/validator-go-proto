@@ -17,7 +17,7 @@
 all: nuke dep build test
 
 dep:
-	go install github.com/gogo/protobuf/protoc-gen-gogo
+	go install google.golang.org/protobuf/cmd/protoc-gen-go
 
 checklicense:
 	go get github.com/awalterschulze/checklicense
