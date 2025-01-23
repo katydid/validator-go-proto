@@ -27,15 +27,6 @@ jobs:
       run: |
         cd gopath/src/github.com/katydid/validator-go-proto
         go install -x github.com/awalterschulze/checklicense
-        go install -x google.golang.org/protobuf/cmd/protoc-gen-go
-    - name: Setup protoc
-      run: |
-        cd gopath/src/github.com/katydid/validator-go-proto
-        ./install_protoc.sh
-    - name: Protoc version
-      run: |
-        cd gopath/src/github.com/katydid/validator-go-proto
-        PATH=$HOME/bin:$PATH protoc --version
     - name: env
       run: env && go env && pwd
     - name: tree
