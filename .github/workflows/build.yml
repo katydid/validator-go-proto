@@ -9,12 +9,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v4
       with:
-        path: gopath/src/github.com/katydid/validator-gogo-proto
-    - name: Checkout gogoprotobuf
-      uses: actions/checkout@v4
-      with:
-        repository: gogo/protobuf
-        path: gopath/src/github.com/gogo/protobuf
+        path: gopath/src/github.com/katydid/validator-go-proto
     - name: Checkout testsuite
       uses: actions/checkout@v4
       with:
@@ -26,20 +21,20 @@ jobs:
         go-version: 1.23
     - name: Fetch dependencies
       run: |
-        cd gopath/src/github.com/katydid/validator-gogo-proto
+        cd gopath/src/github.com/katydid/validator-go-proto
         go mod download -x
     - name: Install tools
       run: |
-        cd gopath/src/github.com/katydid/validator-gogo-proto
+        cd gopath/src/github.com/katydid/validator-go-proto
         go install -x github.com/awalterschulze/checklicense
-        go install -x github.com/gogo/protobuf/protoc-gen-gogo
+        go install -x google.golang.org/protobuf/cmd/protoc-gen-go
     - name: Setup protoc
       run: |
-        cd gopath/src/github.com/katydid/validator-gogo-proto
+        cd gopath/src/github.com/katydid/validator-go-proto
         ./install_protoc.sh
     - name: Protoc version
       run: |
-        cd gopath/src/github.com/katydid/validator-gogo-proto
+        cd gopath/src/github.com/katydid/validator-go-proto
         PATH=$HOME/bin:$PATH protoc --version
     - name: env
       run: env && go env && pwd
@@ -47,17 +42,17 @@ jobs:
       run: tree
     - name: Build
       run: |
-        cd gopath/src/github.com/katydid/validator-gogo-proto
+        cd gopath/src/github.com/katydid/validator-go-proto
         make build
     - name: Test
       run: |
-        cd gopath/src/github.com/katydid/validator-gogo-proto
+        cd gopath/src/github.com/katydid/validator-go-proto
         make test
     - name: Checklicencse
       run: |
-        cd gopath/src/github.com/katydid/validator-gogo-proto
+        cd gopath/src/github.com/katydid/validator-go-proto
         make checklicense
     - name: Diff
       run: |
-        cd gopath/src/github.com/katydid/validator-gogo-proto
+        cd gopath/src/github.com/katydid/validator-go-proto
         make diff

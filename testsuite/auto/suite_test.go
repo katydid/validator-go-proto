@@ -19,10 +19,10 @@ import (
 	"testing"
 
 	"github.com/katydid/parser-go/parser"
+	"github.com/katydid/validator-go-proto/testsuite"
 	"github.com/katydid/validator-go/validator/ast"
 	"github.com/katydid/validator-go/validator/auto"
 	"github.com/katydid/validator-go/validator/interp"
-	"github.com/katydid/validator-gogo-proto/testsuite"
 )
 
 func TestSuite(t *testing.T) {

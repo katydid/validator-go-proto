@@ -21,12 +21,12 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/gogo/protobuf/proto"
-	"github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
+	protoparser "github.com/katydid/parser-go-proto/proto"
 	"github.com/katydid/parser-go/parser"
-	protoparser "github.com/katydid/parser-gogo-proto/proto"
 	"github.com/katydid/validator-go/validator"
 	"github.com/katydid/validator-go/validator/ast"
+	"google.golang.org/protobuf/proto"
+	descriptor "google.golang.org/protobuf/types/descriptorpb"
 )
 
 func exists(filename string) bool {
