@@ -6,5 +6,4 @@ package tools
 
 import (
 	_ "github.com/awalterschulze/checklicense"
-	_ "google.golang.org/protobuf/cmd/protoc-gen-go"
 )
