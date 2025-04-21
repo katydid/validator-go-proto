@@ -26,7 +26,6 @@ jobs:
     - name: Install tools
       run: |
         cd gopath/src/github.com/katydid/validator-go-proto
-        go install -x github.com/awalterschulze/checklicense
     - name: env
       run: env && go env && pwd
     - name: tree
@@ -40,9 +39,10 @@ jobs:
         cd gopath/src/github.com/katydid/validator-go-proto
         make test
     - name: Checklicencse
-      run: |
-        cd gopath/src/github.com/katydid/validator-go-proto
-        make checklicense
+      uses: awalterschulze/checklicense@v1.0.6
+      with:
+        path: gopath/src/github.com/katydid/validator-go-proto
+        ignores: doc.go .svg .txt
     - name: Diff
       run: |
         cd gopath/src/github.com/katydid/validator-go-proto
