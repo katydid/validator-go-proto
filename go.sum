@@ -8,8 +8,8 @@ github.com/katydid/parser-go-proto v0.2.1 h1:/pnCvlLLJuhvPTKG3RCqoaG5Gk8gZg1NSRa
 github.com/katydid/parser-go-proto v0.2.1/go.mod h1:QVqHViDvHXCNp0oPFlHongCSrnfmJQ8n5+gOM/px0Sc=
 github.com/katydid/parser-go-xml v0.1.1 h1:W6Xaxwy1Gh231NCM13L4Bdxfi4aYE6JBTdYsvF6TB1s=
 github.com/katydid/parser-go-xml v0.1.1/go.mod h1:I9tZR4C/G6T4QleGfiF1qg5zOMcqp2ASbevDYMvUIdU=
-github.com/katydid/validator-go v0.5.4 h1:MYGjpFl820it8+/h2oqngaHhjGfQNR2LJ4dMFZmyRK8=
-github.com/katydid/validator-go v0.5.4/go.mod h1:E+tP+bOx5KjF44Yi7gz35D/C2qhYxHJAHCQn178uNB4=
+github.com/katydid/validator-go v0.6.3 h1:+aQN0PLDcCGYFNqVISEtCrzOL8vqI5vCp3wNpCSUZRc=
+github.com/katydid/validator-go v0.6.3/go.mod h1:nsH1ed186z+HV3hhaa26Ls1hPJE7WO8CKXXEkCrOVCQ=
 golang.org/x/xerrors v0.0.0-20191204190536-9bdfabe68543 h1:E7g+9GITq07hpfrRu66IVDexMakfv52eLZ2CXBWiKr4=
 golang.org/x/xerrors v0.0.0-20191204190536-9bdfabe68543/go.mod h1:I/5z698sn9Ka8TeJc9MKroUUfqBBauWjQqLJ2OPfmY0=
 google.golang.org/protobuf v1.36.3 h1:82DV7MYdb8anAVi3qge1wSnMDrnKK7ebr+I0hHRN1BU=

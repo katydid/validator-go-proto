@@ -22,7 +22,7 @@ import (
 	"github.com/katydid/validator-go-proto/testsuite"
 	"github.com/katydid/validator-go/validator/ast"
 	"github.com/katydid/validator-go/validator/auto"
-	"github.com/katydid/validator-go/validator/interp"
+	"github.com/katydid/validator-go/validator/intern"
 )
 
 func TestSuite(t *testing.T) {
@@ -45,7 +45,7 @@ func TestSuite(t *testing.T) {
 }
 
 func test(t *testing.T, name string, g *ast.Grammar, p parser.Interface, expected bool, desc string, record bool) {
-	if interp.HasRecursion(g) {
+	if intern.HasRecursion(g) {
 		t.Skipf("convert was not designed to handle recursion")
 	}
 	if strings.HasPrefix(name, "GoBigOr") {
