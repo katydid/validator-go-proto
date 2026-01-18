@@ -21,6 +21,7 @@ import (
 	"path/filepath"
 	"strings"
 
+	"github.com/katydid/parser-go-json/json"
 	protoparser "github.com/katydid/parser-go-proto/proto"
 	"github.com/katydid/parser-go/parser"
 	"github.com/katydid/validator-go/validator"
@@ -101,7 +102,7 @@ func ReadTestSuite() ([]Test, error) {
 	}
 	for codec, folders := range codecs {
 		switch codec {
-		case "pb":
+		case "pb", "json":
 		default:
 			// codec not supported
 			continue
@@ -125,7 +126,7 @@ func ReadBenchmarkSuite() ([]Bench, error) {
 	}
 	for codec, folders := range codecs {
 		switch codec {
-		case "pb":
+		case "pb", "json":
 		default:
 			// codec not supported
 			continue
@@ -183,6 +184,11 @@ func readTestFolder(path string) (*Test, error) {
 				return nil, err
 			}
 			p, err = newProtoParser(pkgName, msgName, desc, filename)
+			if err != nil {
+				return nil, err
+			}
+		case "json":
+			p, err = newJsonParser(filename)
 			if err != nil {
 				return nil, err
 			}
@@ -256,6 +262,12 @@ func readBenchFolder(path string) (*Bench, error) {
 				return nil, err
 			}
 			parsers = append(parsers, p)
+		case "json":
+			p, err := newJsonParser(filename)
+			if err != nil {
+				return nil, err
+			}
+			parsers = append(parsers, p)
 		default:
 			// unsupported codec
 			continue
@@ -318,4 +330,34 @@ func newProtoParser(pkgName, msgName string, desc *descriptor.FileDescriptorSet,
 		return nil, fmt.Errorf("err <%v> parser.Init with bytes from filename <%s>", err, filename)
 	}
 	return pp, nil
+}
+
+func newJsonParser(filename string) (ResetParser, error) {
+	bytes, err := ioutil.ReadFile(filename)
+	if err != nil {
+		return nil, fmt.Errorf("err <%v> reading file <%s>", err, filename)
+	}
+	j := json.NewParser()
+	if err := j.Init(bytes); err != nil {
+		return nil, fmt.Errorf("err <%v> parser.Init with bytes from filename <%s>", err, filename)
+	}
+	return newResetParser(j, bytes), nil
+}
+
+type InitParser interface {
+	parser.Interface
+	Init(buf []byte) error
+}
+
+type resetParser struct {
+	InitParser
+	buf []byte
+}
+
+func (r *resetParser) Reset() error {
+	return r.InitParser.Init(r.buf)
+}
+
+func newResetParser(p InitParser, buf []byte) ResetParser {
+	return &resetParser{InitParser: p, buf: buf}
 }
