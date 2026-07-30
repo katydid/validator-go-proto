@@ -23,7 +23,7 @@ import (
 
 	"github.com/katydid/parser-go-json/json"
 	protoparser "github.com/katydid/parser-go-proto/proto"
-	"github.com/katydid/parser-go/parser"
+	"github.com/katydid/parser-go/parse"
 	"github.com/katydid/validator-go/validator"
 	"github.com/katydid/validator-go/validator/ast"
 	"google.golang.org/protobuf/proto"
@@ -145,7 +145,7 @@ func ReadBenchmarkSuite() ([]Bench, error) {
 type Test struct {
 	Name     string
 	Grammar  *ast.Grammar
-	Parser   parser.Interface
+	Parser   parse.Parser
 	Expected bool
 	Record   bool
 }
@@ -160,7 +160,7 @@ func readTestFolder(path string) (*Test, error) {
 	if err != nil {
 		return nil, fmt.Errorf("err <%v> reading folder <%s>", err, path)
 	}
-	var p parser.Interface
+	var p parse.Parser
 	var expected bool
 	var codecName string
 	for _, fileInfo := range fileInfos {
@@ -218,8 +218,8 @@ type Bench struct {
 }
 
 type ResetParser interface {
-	parser.Interface
-	Reset() error
+	parse.Parser
+	Reset()
 }
 
 func readBenchFolder(path string) (*Bench, error) {
@@ -318,7 +318,7 @@ func getProtoDesc(filename string) (pkgName, msgName string, desc *descriptor.Fi
 }
 
 func newProtoParser(pkgName, msgName string, desc *descriptor.FileDescriptorSet, filename string) (ResetParser, error) {
-	pp, err := protoparser.NewParserWithDesc(pkgName, msgName, desc)
+	pp, err := protoparser.NewParser(pkgName, msgName, protoparser.WithFileDescriptorSet(desc))
 	if err != nil {
 		return nil, fmt.Errorf("err <%v> createing proto parser", err)
 	}
@@ -326,9 +326,7 @@ func newProtoParser(pkgName, msgName string, desc *descriptor.FileDescriptorSet,
 	if err != nil {
 		return nil, fmt.Errorf("err <%v> reading file <%s>", err, filename)
 	}
-	if err := pp.Init(bytes); err != nil {
-		return nil, fmt.Errorf("err <%v> parser.Init with bytes from filename <%s>", err, filename)
-	}
+	pp.Init(bytes)
 	return pp, nil
 }
 
@@ -338,15 +336,13 @@ func newJsonParser(filename string) (ResetParser, error) {
 		return nil, fmt.Errorf("err <%v> reading file <%s>", err, filename)
 	}
 	j := json.NewParser()
-	if err := j.Init(bytes); err != nil {
-		return nil, fmt.Errorf("err <%v> parser.Init with bytes from filename <%s>", err, filename)
-	}
+	j.Init(bytes)
 	return newResetParser(j, bytes), nil
 }
 
 type InitParser interface {
-	parser.Interface
-	Init(buf []byte) error
+	parse.Parser
+	Init(buf []byte)
 }
 
 type resetParser struct {
@@ -354,8 +350,8 @@ type resetParser struct {
 	buf []byte
 }
 
-func (r *resetParser) Reset() error {
-	return r.InitParser.Init(r.buf)
+func (r *resetParser) Reset() {
+	r.InitParser.Init(r.buf)
 }
 
 func newResetParser(p InitParser, buf []byte) ResetParser {

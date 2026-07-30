@@ -41,23 +41,21 @@ func BenchmarkSuite(b *testing.B) {
 	}
 }
 
-func bench(b *testing.B, grammar *ast.Grammar, parsers []testsuite.ResetParser, record bool) {
+func bench(b *testing.B, g *ast.Grammar, parsers []testsuite.ResetParser, record bool) {
 	num := len(parsers)
 	var a *auto.Auto
 	var err error
 	if record {
-		a, err = auto.CompileRecord(grammar)
+		a, err = auto.Compile(g, auto.WithRecordSimplificationRules(), auto.WithFieldNameTable())
 	} else {
-		a, err = auto.Compile(grammar)
+		a, err = auto.Compile(g)
 	}
 	if err != nil {
 		b.Fatal(err)
 	}
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-		if err := parsers[i%num].Reset(); err != nil {
-			b.Fatal(err)
-		}
+		parsers[i%num].Reset()
 		if _, err := a.Validate(parsers[i%num]); err != nil {
 			b.Fatal(err)
 		}

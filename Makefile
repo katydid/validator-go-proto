@@ -16,6 +16,13 @@
 
 all: nuke dep build test
 
+paper_benchmarks:
+	go test -v -run=none -bench=BenchmarkSuite/Conf ./testsuite/intern/
+	go test -v -run=none -bench=BenchmarkSuite/Conf -benchtime=100x ./testsuite/mem/
+	go test -v -run=none -bench=BenchmarkSuite/Conf -benchtime=1000x ./testsuite/mem/
+	go test -v -run=none -bench=BenchmarkSuite/Conf -benchtime=10000x ./testsuite/mem/
+	go test -v -run=none -bench=BenchmarkSuite/Conf ./testsuite/auto/
+
 test:
 	go clean -testcache
 	TESTSUITE=MUST go test ./...
@@ -40,3 +47,4 @@ gofmt:
 
 diff:
 	git diff --exit-code .
+
