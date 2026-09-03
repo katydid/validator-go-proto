@@ -1,11 +1,11 @@
-module github.com/katydid/validator-go-proto
+module katydid.org.za/go/validator-go-proto
 
 go 1.26.3
 
 require (
-	github.com/katydid/parser-go v0.9.0
-	github.com/katydid/parser-go-json v0.6.0
-	github.com/katydid/parser-go-proto v0.3.0
-	github.com/katydid/validator-go v0.7.2
 	google.golang.org/protobuf v1.36.3
+	katydid.org.za/go/parser-go v0.11.1
+	katydid.org.za/go/parser-go-json v0.8.1
+	katydid.org.za/go/parser-go-proto v0.5.1
+	katydid.org.za/go/validator-go v0.8.1
 )

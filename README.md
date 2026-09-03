@@ -1,10 +1,10 @@
 ## Katydid Validator for Protocol Buffers in Go
 
-[![GoDoc](https://godoc.org/github.com/katydid/validator-go-proto?status.svg)](https://godoc.org/github.com/katydid/validator-go-proto) [![Build Status](https://github.com/katydid/validator-go-proto/actions/workflows/build.yml/badge.svg)](https://github.com/katydid/validator-go-proto/actions)
+[![GoDoc](https://godoc.org/katydid.org.za/go/validator-go-proto?status.svg)](https://godoc.org/katydid.org.za/go/validator-go-proto) [![Build Status](https://git.katydid.org.za/validator-go-proto/actions/workflows/build.yml/badge.svg)](https://git.katydid.org.za/validator-go-proto/actions)
 
-![Katydid Logo](https://cdn.rawgit.com/katydid/katydid.github.io/main/logo.png)
+![Katydid Logo](https://katydid.org.za/logo.png)
 
-The [Katydid](http://katydid.github.io) validator for Protocol Buffers in Go.
+The [Katydid](https://katydid.org.za) validator for Protocol Buffers in Go.
 
 The validator is a regular expression type language for protocol buffers that matches up to 1000000s of records per second.
 This package includes:
