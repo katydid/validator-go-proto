@@ -17,10 +17,10 @@ package intern_test
 import (
 	"testing"
 
-	"katydid.org.za/go/parser-go/parse"
-	"katydid.org.za/go/validator-go-proto/testsuite"
-	"katydid.org.za/go/validator-go/validator/ast"
-	"katydid.org.za/go/validator-go/validator/intern"
+	"go.katydid.org.za/parser-go/parse"
+	"go.katydid.org.za/validator-go-proto/testsuite"
+	"go.katydid.org.za/validator-go/validator/ast"
+	"go.katydid.org.za/validator-go/validator/intern"
 )
 
 func TestSuite(t *testing.T) {

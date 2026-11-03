@@ -21,13 +21,13 @@ import (
 	"path/filepath"
 	"strings"
 
+	"go.katydid.org.za/parser-go-json/json"
+	protoparser "go.katydid.org.za/parser-go-proto/proto"
+	"go.katydid.org.za/parser-go/parse"
+	"go.katydid.org.za/validator-go/validator"
+	"go.katydid.org.za/validator-go/validator/ast"
 	"google.golang.org/protobuf/proto"
 	descriptor "google.golang.org/protobuf/types/descriptorpb"
-	"katydid.org.za/go/parser-go-json/json"
-	protoparser "katydid.org.za/go/parser-go-proto/proto"
-	"katydid.org.za/go/parser-go/parse"
-	"katydid.org.za/go/validator-go/validator"
-	"katydid.org.za/go/validator-go/validator/ast"
 )
 
 func exists(filename string) bool {
@@ -35,17 +35,8 @@ func exists(filename string) bool {
 	return err == nil
 }
 
-var testpath string
-var benchpath string
-
-func init() {
-	gopath := os.Getenv("GOPATH")
-	if gopath == "" {
-		gopath = "../../../../../../"
-	}
-	testpath = filepath.Join(gopath, "src/katydid.org.za/go/validator-testsuite/validator/tests")
-	benchpath = filepath.Join(gopath, "src/katydid.org.za/go/validator-testsuite/validator/benches")
-}
+var testpath = "../../../validator-testsuite/validator/tests"
+var benchpath = "../../../validator-testsuite/validator/benches"
 
 func TestSuiteExists() (bool, error) {
 	if exists(testpath) {

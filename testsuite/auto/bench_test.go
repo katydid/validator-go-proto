@@ -17,9 +17,9 @@ package auto_test
 import (
 	"testing"
 
-	"katydid.org.za/go/validator-go-proto/testsuite"
-	"katydid.org.za/go/validator-go/validator/ast"
-	"katydid.org.za/go/validator-go/validator/auto"
+	"go.katydid.org.za/validator-go-proto/testsuite"
+	"go.katydid.org.za/validator-go/validator/ast"
+	"go.katydid.org.za/validator-go/validator/auto"
 )
 
 func BenchmarkSuite(b *testing.B) {

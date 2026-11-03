@@ -17,8 +17,8 @@ package intern_test
 import (
 	"testing"
 
-	"katydid.org.za/go/validator-go-proto/testsuite"
-	"katydid.org.za/go/validator-go/validator/intern"
+	"go.katydid.org.za/validator-go-proto/testsuite"
+	"go.katydid.org.za/validator-go/validator/intern"
 )
 
 func BenchmarkSuite(b *testing.B) {
